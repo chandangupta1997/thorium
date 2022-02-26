@@ -1,73 +1,47 @@
 const express = require('express');
+const { route } = require('express/lib/application');
+const { append } = require('express/lib/response');
 const router = express.Router();
 
-router.get('/students/:name', function(req, res) {
-    let studentName = req.params.name
-    console.log(studentName)
-    res.send(studentName)
-})
+router.post('/test-me', function (req, res) {
 
-router.get("/random" , function(req, res) {
-    res.send("hi there")
-})
+    
+    let arr=[12,'function up ',34,'chandan']
 
-
-router.get("/test-api" , function(req, res) {
-    res.send("hi FunctionUp")
-})
-
-
-router.get("/test-api-2" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API")
-})
-
-
-router.get("/test-api-3" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's ")
-})
-
-
-router.get("/test-api-4" , function(req, res) {
-    res.send("hi FunctionUp. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
-})
-
-
-
-router.get("/test-api-5" , function(req, res) {
-    res.send("hi FunctionUp5. This is another cool API. And NOw i am bored of creating API's. PLZ STOP CREATING MORE API;s ")
-})
-
-router.get("/test-api-6" , function(req, res) {
-    res.send({a:56, b: 45})
-})
-
-router.post("/test-post", function(req, res) {
-    res.send([ 23, 45 , 6])
-})
-
-
-router.post("/test-post-2", function(req, res) {
-    res.send(  { msg: "hi" , status: true }  )
-})
-
-router.post("/test-post-3", function(req, res) {
-    // let id = req.body.user
-    // let pwd= req.body.password
-
-    // console.log( id , pwd)
-
-    console.log( req.body )
-
-    res.send(  { msg: "hi" , status: true }  )
-})
-
-
-
-router.post("/test-post-4", function(req, res) {
-    let arr= [ 12, "functionup"]
-    let ele= req.body.element
+    let ele =req.body.element // isme data aaega 
     arr.push(ele)
-    res.send(  { msg: arr , status: true }  )
-})
+
+    
+    // res.send{(msg:arr,status: true)} iska mtlb puchna hai 
+    res.send('My first ever api!')
+});
 
 module.exports = router;
+
+
+
+
+router.post('/post4',function(req,res){
+
+
+ })
+
+ router.get('/link1',function (req,res){
+    let arr=[33,34,35,37,38]
+    const n=arr.length+1
+    let sum=0
+    for(let i=0;i<arr.length;i++){
+        sum=sum+arr[i]
+    }
+    const first =arr[0]
+    const last =arr.pop()
+    const total=n*(first+last)/2
+    const missingNum2=total-sum
+    console.log(missingNum2)
+
+    res.send(  { data: missingNumber  }  )
+
+ })
+ 
+
+ 
