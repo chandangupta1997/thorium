@@ -1,14 +1,22 @@
 const { count } = require("console")
+const bookModel = require("../models/bookModel")
 const BookModel= require("../models/bookModel")
 
 const createBook= async function (req, res) {
-    let data= req.body
+    let data= req.body  // just a varibale to catch data mtlb bs ek dabba jo body se atta ha 
+    // qyuki post data body mai jata hai 
 
-    let savedData= await BookModel.create(data)
+    let savedData= await BookModel.create(data) // savedData for data that has been saved in DB
+    // by .create() fx in mongo db 
     res.send({msg: savedData})
 }
 
 const getBooksData= async function (req, res) {
+    let savedgetBooksData=await BookModel.find()
+    res.send({msg:savedgetBooksData})
+}
+
+
 
     // let allBooks= await BookModel.find( ).count() // COUNT
 
@@ -65,7 +73,7 @@ const getBooksData= async function (req, res) {
     
     // ASYNC AWAIT
     
-    let a= 2+4
+   /* let a= 2+4
     a= a + 10
     console.log(a)
     let allBooks= await BookModel.find( )  //normally this is an asynchronous call..but await makes it synchronous
@@ -77,9 +85,51 @@ const getBooksData= async function (req, res) {
     let b = 14
     b= b+ 10
     console.log(b)
-    res.send({msg: allBooks})
+    res.send({msg: allBooks})*/
+
+
+
+const bookList= async function(req,res){
+    let savedBookListData=await BookModel.find().select({bookName:1,authorName:1,_id:0})
+    res.send({msg:savedBookListData})
+
+}
+
+const getBooksinYear =  async function (req,res){
+    inputYear=req.body.Year // ye year hmne user se liya hai through post req
+
+
+    let savedgetBooksinYear= await BookModel.find(sort({Year:{$eq:inputYear}}))
+    // yha pr error aaya tha ye wala  
+    //  if (!val) throw new TypeError('Invalid sort value: { ' + field + ': ' + value + ' }');
+    // nhi to phle ye tha  find()sort({Year:{$eq:inputYear}})
+    res.send({msg:savedgetBooksinYear})
+
+}
+
+const getXINRBooks=   async function(req,res){
+    let savedgetINRBooks= await BookModel.find(sort({Indianprice:{$in:[100,200,500]}}))
+    res.send({msg:savedgetINRBooks})
+
+
+}
+
+const getRandomBooks=async function(req,res){
+    let savedgetRandomBooks=await BookModel.find($OR[{stockAvailable:true},{totalPages:{$gt:500}}])
+    res.send({msg:savedgetRandomBooks})
 }
 
 
-module.exports.createBook= createBook
+
+
+
+module.exports.bookList=bookList  // exporting booklist to outer world
+module.exports.createBook= createBook  
 module.exports.getBooksData= getBooksData
+module.exports.getBooksinYear=getBooksinYear  // bahar isko BookController.getBooksinYear ke namm se call kiya jaega 
+// jiski value hai const getBooksinYear
+
+module.exports.getXINRBooks=getXINRBooks
+//module.exports.localName=PublicName
+
+module.exports.getRandomBooks=getRandomBooks

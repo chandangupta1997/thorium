@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema( {
+/*const bookSchema = new mongoose.Schema( {
     bookName: String, 
     authorName: String, 
     tags: [String],
@@ -11,9 +11,26 @@ const bookSchema = new mongoose.Schema( {
         europePrice: String,
     },
     sales: {type: Number, default: 10}
-}, { timestamps: true });
+}, { timestamps: true });*/
 
+//module.exports = mongoose.model('Book', bookSchema) //users
 
+//bookSChema mai new moongoose schema bnao 
+// aur mongoose ek program hai jo express ko database se connect krta hai 
+const bookSchema=new mongoose.Schema({ 
+    
+    bookName:{type:String,
+        required:true},// mandatory 
+    price:{indianPrice:Number,
+    europePrice:Number},
+    Year:{type:String,
+        default:2021},
+    tags:[String],
+    totalpages:Number,
+    stockAvailable:Boolean
+    
+
+})
 module.exports = mongoose.model('Book', bookSchema) //users
 
 //Validation:
