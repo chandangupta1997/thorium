@@ -1,25 +1,31 @@
 const express = require('express');
 const router = express.Router();
-// const UserModel= require("../models/userModel.js")
+const UserModel= require("../models/userModel.js")
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
+const authorController=require("../controllers/authorController")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+
 
 router.post("/createUser", UserController.createUser  )
 
 router.get("/getUsersData", UserController.getUsersData)
 
+
+
 router.post("/createBook", BookController.createBook  )
 
 router.get("/getBooksData", BookController.getBooksData)
 
-router.post("/updateBooks", BookController.updateBooks)
-router.post("/deleteBooks", BookController.deleteBooks)
 
-//MOMENT JS
+
+//router.post("/updateBooks", BookController.updateBooks)
+//router.post("/deleteBooks", BookController.deleteBooks)
+
+
+router.post("/createAuthorData",authorController.createAuthor)
+router.get("/getAuthorData",authorController.getAuthorData)
+/*//MOMENT JS
 const moment = require('moment');
 router.get("/dateManipulations", function (req, res) {
     
@@ -36,6 +42,12 @@ router.get("/dateManipulations", function (req, res) {
     console.log(x)
 
     res.send({ msg: "all good"})
-})
+})*/
 
 module.exports = router;
+
+//fddv
+
+
+//;dksn;n
+///kjblvb
