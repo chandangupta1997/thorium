@@ -100,6 +100,8 @@ const getBooksinYear =  async function (req,res){
 
 
     let savedgetBooksinYear= await BookModel.find(sort({Year:{$eq:inputYear}}))
+    //no need of eq 
+    // no need of sort 
     // yha pr error aaya tha ye wala  
     //  if (!val) throw new TypeError('Invalid sort value: { ' + field + ': ' + value + ' }');
     // nhi to phle ye tha  find()sort({Year:{$eq:inputYear}})
@@ -110,6 +112,7 @@ const getBooksinYear =  async function (req,res){
 const getXINRBooks=   async function(req,res){
     let savedgetINRBooks= await BookModel.find(sort({Indianprice:{$in:[100,200,500]}}))
     res.send({msg:savedgetINRBooks})
+    //sort is not requird 
 
 
 }
@@ -133,3 +136,8 @@ module.exports.getXINRBooks=getXINRBooks
 //module.exports.localName=PublicName
 
 module.exports.getRandomBooks=getRandomBooks
+
+//kjblivub
+
+//kvukvkuv
+//knnk

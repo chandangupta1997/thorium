@@ -26,7 +26,7 @@ const bookSchema=new mongoose.Schema({
     Year:{type:String,
         default:2021},
     tags:[String],
-    totalpages:Number,
+    totalPages:Number,
     stockAvailable:Boolean
     
 
