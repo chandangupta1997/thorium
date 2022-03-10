@@ -1,26 +1,56 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
-const createUser = async function (abcd, xyz) {
+const createUser = async function (req, res) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
   //the second parameter is always the response
-  let data = abcd.body;
-  let savedData = await userModel.create(data);
-  console.log(abcd.newAtribute);
-  xyz.send({ msg: savedData });
+
+  try{let data = req.body;
+    //condition for no empty body or empty object 
+    if(Objecy.keys(data).length =0) return res.status(400).send({msg:"Bad request "})
+    let savedData = await userModel.create(data);
+    console.log(req.newAtribute);
+    res.send({ msg: savedData });}
+  
+
+
+  catch(error){
+
+    console.log("this is the error",err.message)
+    res.status(500).send({msg:"error","puramsg ":error.message})
+
+    res.send({msg:"error","puramsg ":error.message}).status(500)
+
+
+  }
 };
 
 const loginUser = async function (req, res) {
-  let userName = req.body.emailId;
-  let password = req.body.password;
 
-  let user = await userModel.findOne({ emailId: userName, password: password });
-  if (!user)
-    return res.send({
-      status: false,
-      msg: "username or the password is not corerct",
-    });
+  try{
+    
+    let userName = req.body.emailId;
+    let password = req.body.password;
+  
+    let user = await userModel.findOne({ emailId: userName, password: password });
+    if (!user)
+      return res.send({
+        status: false,
+        msg: "username or the password is not corerct",
+      });
+    
+    }
+
+
+  catch(error)
+  
+  {
+    console.log("this is the error",err.message)
+    res.status(500).send({msg:"error","puramsg ":error.message})
+
+  }
+  
 
   // Once the login is successful, create the jwt token with sign function
   // Sign function has 2 inputs:
@@ -71,6 +101,7 @@ const updateUser = async function (req, res) {
 // Check if the token is present
 // Check if the token present is a valid token
 // Return a different error message in both these cases
+try{
 
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
@@ -82,7 +113,21 @@ const updateUser = async function (req, res) {
   let userData = req.body;
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.send({ status: updatedUser, data: updatedUser });
-};
+}
+
+
+
+  
+
+
+
+catch(error){
+
+  console.log("this is the error",err.message)
+  res.status(500).send({msg:"error","puramsg ":error.message})
+
+
+}
 
 const postMessage = async function (req, res) {
     let message = req.body.message
