@@ -4,6 +4,8 @@ const CowinController= require("../controllers/cowinController")
 
 const WeatherController= require("../controllers/weatherController")
 
+const MemeController=require("../controllers/memeController")
+
 
 
 router.get("/test-me", function (req, res) {
@@ -23,6 +25,16 @@ router.get("/cowin/getByDistrict",CowinController.getByDistrict)
 
 
 router.get("/londonWeather",WeatherController.londonWeather)
+
+router.get("/arrayWeather",WeatherController.arrayWeather)
+
+
+
+
+router.get("/getMemes",MemeController.getMemes)
+
+
+router.post("/createMemes",MemeController.createMemes)
 
 //router.get("/cowin/d")
 
