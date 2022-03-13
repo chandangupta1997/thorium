@@ -1,27 +1,25 @@
-const productModel = require("../models/productModel")
+const productModel = require('../models/productModel')
 
 
-const createProduct= async function(req,res){
-    let data =req.body
-   let createdData =productModel.create(data)
-    res.send("You have created product succesfully,",createdData)
 
+
+
+
+const createProduct = async function (req, res) {
+
+
+
+    try{
+    let productDetails = req.body
+    let productCreated = await productModel.create(productDetails)
+    res.send({ data: productCreated})
+
+    }
+
+
+    catch(error){
+        res.send(error.message)
+    }
 }
 
-
-
-module.exports.createProduct=createProduct
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports.createProduct = createProduct
